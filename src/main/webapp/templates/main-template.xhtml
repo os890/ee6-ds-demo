@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ds="http://deltaspike.apache.org/jsf">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-theme.min.css"/>
+    <h:outputStylesheet library="css" name="custom.css"/>
+</h:head>
+<h:body>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://deltaspike.apache.org" target="_blank"><b>Apache DeltaSpike</b> (Demo)</a>
+            </div>
+
+            <h:form>
+                <div id="nav" class="collapse navbar-collapse">
+                    <ul id="desktopNav1" class="nav navbar-nav">
+                        <li>
+                            <h:commandLink id="lnkLogin" value="Login" action="#{menuBean.login}" rendered="#{!userHolder.loggedIn}"/>
+                            <h:commandLink id="lnkLogout" value="Logout" action="#{menuBean.logout}" rendered="#{userHolder.loggedIn}"/>
+                        </li>
+                        <li>
+                            <h:commandLink id="lnkRegister" value="Register" action="#{menuBean.register}"/>
+                        </li>
+                        <li>
+                            <h:commandLink id="lnkInternalInfo" value="Info" action="#{menuBean.internalInfo}"/>
+                        </li>
+                    </ul>
+                </div>
+            </h:form>
+        </div>
+    </div>
+
+    <p style="height: 50px"/>
+
+    <div class="container">
+        <div class="page-header" style="border: 0">
+            <h2>DeltaSpike <small>closes the gaps!</small></h2>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <ui:insert name="panel-title"/>
+            </div>
+            <div class="panel-body">
+                <h:form>
+                    <ui:insert name="content"/>
+                    <ds:preventDoubleSubmit/>
+                </h:form>
+            </div>
+        </div>
+
+        <h:panelGroup layout="block" class="panel" rendered="#{messageController.globalMessageAvailable}">
+            <div >
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-inbox"/> Messages</h3>
+                </div>
+                <div class="panel-body">
+                    <h:messages globalOnly="true"
+                                infoStyle="color: dodgerblue" warnStyle="color: orange"
+                                errorStyle="color: red" fatalStyle="color: darkred"
+                                style="list-style-type: none;"/>
+                </div>
+            </div>
+        </h:panelGroup>
+    </div>
+
+    <ds:windowId/>
+
+    <h:outputScript library="js" name="jquery.min.js"/>
+    <h:outputScript library="js" name="bootstrap.min.js"/>
+</h:body>
+</html>
+
+
