@@ -18,8 +18,8 @@
  */
 package org.os890.demo.ee6.ds.view.controller.user;
 
+import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.WindowScoped;
 import org.os890.demo.ee6.ds.domain.user.User;
-import org.apache.deltaspike.core.api.scope.WindowScoped;
 
 import javax.inject.Named;
 import java.io.Serializable;

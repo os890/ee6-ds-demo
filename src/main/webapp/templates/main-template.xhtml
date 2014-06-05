@@ -20,8 +20,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:ds="http://deltaspike.apache.org/jsf">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8"/>
@@ -71,7 +70,6 @@
             <div class="panel-body">
                 <h:form>
                     <ui:insert name="content"/>
-                    <ds:preventDoubleSubmit/>
                 </h:form>
             </div>
         </div>
@@ -90,8 +88,6 @@
             </div>
         </h:panelGroup>
     </div>
-
-    <ds:windowId/>
 
     <h:outputScript library="js" name="jquery.min.js"/>
     <h:outputScript library="js" name="bootstrap.min.js"/>

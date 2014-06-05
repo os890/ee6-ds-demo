@@ -18,14 +18,13 @@
  */
 package org.os890.demo.ee6.ds.security;
 
+import org.apache.myfaces.extensions.cdi.core.api.security.AbstractAccessDecisionVoter;
+import org.apache.myfaces.extensions.cdi.core.api.security.SecurityViolation;
 import org.os890.demo.ee6.ds.view.controller.user.UserHolder;
-import org.os890.demo.ee6.ds.view.i18n.WebappMessageBundle;
-import org.apache.deltaspike.security.api.authorization.AbstractAccessDecisionVoter;
-import org.apache.deltaspike.security.api.authorization.AccessDecisionVoterContext;
-import org.apache.deltaspike.security.api.authorization.SecurityViolation;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.interceptor.InvocationContext;
 import java.util.Set;
 
 @ApplicationScoped
@@ -35,14 +34,11 @@ public class LoginAccessDecisionVoter extends AbstractAccessDecisionVoter {
     @Inject
     private UserHolder userHolder;
 
-    @Inject
-    private WebappMessageBundle webappMessageBundle;
-
     @Override
-    protected void checkPermission(AccessDecisionVoterContext accessDecisionVoterContext,
+    protected void checkPermission(InvocationContext invocationContext,
                                    Set<SecurityViolation> violations) {
         if (!userHolder.isLoggedIn()) {
-            violations.add(newSecurityViolation(webappMessageBundle.msgAccessDenied()));
+            violations.add(newSecurityViolation("{msgAccessDenied}"));
         }
     }
 }

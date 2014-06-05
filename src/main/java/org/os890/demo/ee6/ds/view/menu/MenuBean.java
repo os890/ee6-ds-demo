@@ -18,9 +18,8 @@
  */
 package org.os890.demo.ee6.ds.view.menu;
 
-import org.apache.deltaspike.core.spi.scope.window.WindowContext;
+import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.WindowContext;
 import org.os890.demo.ee6.ds.view.config.Pages;
-import org.apache.deltaspike.core.spi.scope.conversation.GroupedConversationManager;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
@@ -28,28 +27,25 @@ import javax.inject.Inject;
 @Model
 public class MenuBean {
     @Inject
-    private GroupedConversationManager groupedConversationManager;
-
-    @Inject
     private WindowContext windowContext;
 
     public Class<? extends Pages> login() {
-        groupedConversationManager.closeConversations();
+        windowContext.closeConversations();
         return Pages.User.Login.class;
     }
 
     public Class<? extends Pages> logout() {
-        windowContext.closeWindow(windowContext.getCurrentWindowId());
+        windowContext.close();
         return Pages.User.Login.class;
     }
 
     public Class<? extends Pages> register() {
-        groupedConversationManager.closeConversations();
+        windowContext.closeConversations();
         return Pages.User.Registration.class;
     }
 
     public Class<? extends Pages> internalInfo() {
-        groupedConversationManager.closeConversations();
+        windowContext.closeConversations();
         return Pages.InternalInfo.class;
     }
 }

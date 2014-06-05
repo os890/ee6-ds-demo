@@ -18,20 +18,21 @@
  */
 package org.os890.demo.ee6.ds.view.controller.user;
 
+import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.Conversation;
+import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ConversationScoped;
+import org.apache.myfaces.extensions.cdi.jsf.api.Jsf;
+import org.apache.myfaces.extensions.cdi.message.api.MessageContext;
+import org.apache.myfaces.extensions.cdi.message.api.payload.MessageSeverity;
 import org.os890.demo.ee6.ds.backend.user.UserService;
 import org.os890.demo.ee6.ds.domain.user.User;
 import org.os890.demo.ee6.ds.view.config.Pages;
-import org.os890.demo.ee6.ds.view.i18n.WebappMessageBundle;
-import org.apache.deltaspike.core.api.scope.GroupedConversation;
-import org.apache.deltaspike.core.api.scope.GroupedConversationScoped;
-import org.apache.deltaspike.jsf.api.message.JsfMessage;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
 @Named
-@GroupedConversationScoped
+@ConversationScoped
 public class RegistrationPage implements Serializable {
     private static final long serialVersionUID = 3844502441069448490L;
 
@@ -39,10 +40,10 @@ public class RegistrationPage implements Serializable {
     private UserService userService;
 
     @Inject
-    private GroupedConversation conversation;
+    private Conversation conversation;
 
     @Inject
-    private JsfMessage<WebappMessageBundle> webappMessages;
+    private @Jsf MessageContext messageContext;
 
     private User user = new User();
 
@@ -53,12 +54,12 @@ public class RegistrationPage implements Serializable {
 
     public Class<? extends Pages.User> register() {
         if (userService.isRegistered(user.getUserName())) {
-            webappMessages.addError().msgRegistrationFailed(user.getUserName());
+            messageContext.message().text("{msgRegistrationFailed}").namedArgument("userName", user.getUserName()).payload(MessageSeverity.ERROR).add();
             return Pages.User.Registration.class;
         }
 
         userService.save(user);
-        webappMessages.addInfo().msgUserRegistered(user.getUserName());
+        messageContext.message().text("{msgUserRegistered}").namedArgument("userName", user.getUserName()).payload(MessageSeverity.INFO).add();
 
         //in order to re-use the page-bean for the login-page
         conversation.close();
@@ -69,12 +70,12 @@ public class RegistrationPage implements Serializable {
     public Class<? extends Pages> login() {
         User foundUser = userService.findUser(user.getUserName());
         if (foundUser != null && foundUser.getPassword().equals(user.getPassword())) {
-            webappMessages.addInfo().msgLoginSuccessful();
+            messageContext.message().text("{msgLoginSuccessful}").payload(MessageSeverity.INFO).add();
             userHolder.setCurrentUser(foundUser);
             return Pages.InternalInfo.class;
         }
 
-        webappMessages.addError().msgLoginFailed();
+        messageContext.message().text("{msgLoginFailed}").payload(MessageSeverity.ERROR).add();
         userHolder.setCurrentUser(new User());
 
         return null;

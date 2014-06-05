@@ -18,27 +18,27 @@
  */
 package org.os890.demo.ee6.ds.view.config;
 
+import org.apache.myfaces.extensions.cdi.core.api.config.view.DefaultErrorView;
+import org.apache.myfaces.extensions.cdi.core.api.config.view.ViewConfig;
+import org.apache.myfaces.extensions.cdi.core.api.security.Secured;
+import org.apache.myfaces.extensions.cdi.jsf.api.config.view.Page;
+import org.apache.myfaces.extensions.cdi.jsf.api.config.view.PageBean;
 import org.os890.demo.ee6.ds.security.LoginAccessDecisionVoter;
 import org.os890.demo.ee6.ds.view.controller.user.RegistrationPage;
-import org.apache.deltaspike.core.api.config.view.DefaultErrorView;
-import org.apache.deltaspike.core.api.config.view.ViewConfig;
-import org.apache.deltaspike.core.api.config.view.controller.ViewControllerRef;
-import org.apache.deltaspike.jsf.api.config.view.View;
-import org.apache.deltaspike.security.api.authorization.Secured;
 
-import static org.apache.deltaspike.jsf.api.config.view.View.NavigationMode.REDIRECT;
+import static org.apache.myfaces.extensions.cdi.jsf.api.config.view.Page.NavigationMode.REDIRECT;
 
-@View(navigation = REDIRECT)
+@Page(navigation = REDIRECT)
 public interface Pages extends ViewConfig {
     @Secured(LoginAccessDecisionVoter.class)
     interface Secure {}
 
     interface User extends Pages {
-        @ViewControllerRef(RegistrationPage.class)
-        class Login extends DefaultErrorView implements User {}
+        @PageBean(RegistrationPage.class)
+        @Page class Login extends DefaultErrorView implements User {}
 
-        class Registration implements User {}
+        @Page class Registration implements User {}
     }
 
-    class InternalInfo implements Secure, Pages {}
+    @Page class InternalInfo implements Secure, Pages {}
 }
