@@ -21,38 +21,26 @@ package org.os890.demo.ee6.ds.domain.user;
 import org.os890.demo.ee6.ds.domain.AbstractDomainObject;
 
 import javax.enterprise.inject.Typed;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Table(name = "T_User")
-@Entity
-@NamedQuery(name = "findUserByName",
-            query = "select u from User u where u.userName = :currentUser")
 @Typed()
 public class User extends AbstractDomainObject {
     private static final long serialVersionUID = 3810638653455000233L;
 
     @NotNull
     @Size(min = 2, max = 9, message = "invalid user name")
-    @Column(nullable = false, length = 9, unique = true)
     private String userName;
 
     @NotNull
     @Size(min = 2, max = 255, message = "invalid first name")
-    @Column
     private String firstName;
 
     @NotNull
     @Size(min = 2, max = 255, message = "invalid last name")
-    @Column
     private String lastName;
 
     //use e.g. a custom constraint in addition e.g. @Password
-    @Column
     private String password; //usually only a hash-value should be stored here
 
     public User() {

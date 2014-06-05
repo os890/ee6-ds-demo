@@ -20,11 +20,12 @@ package org.os890.demo.ee6.ds.backend.user;
 
 import org.os890.demo.ee6.ds.domain.user.User;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequestScoped
+@ApplicationScoped
 public class SimpleUserCache {
     //just to cache multiple calls during one request
     private Map<String, User> userCache = new HashMap<String, User>(); //ok due to request-scope

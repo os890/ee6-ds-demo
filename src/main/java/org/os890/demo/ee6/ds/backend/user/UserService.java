@@ -26,28 +26,19 @@ import javax.inject.Inject;
 @Stateless
 public class UserService {
     @Inject
-    private UserRepository userRepository;
-
-    @Inject
     private SimpleUserCache userCache;
 
     public boolean isRegistered(String userName) {
-        return this.userCache.get(userName) != null || this.userRepository.isRegistered(userName);
+        return this.userCache.get(userName) != null;
     }
 
     public User findUser(String userName) {
         User result = this.userCache.get(userName);
-
-        if (result == null) {
-            result = this.userRepository.findUser(userName);
-            this.userCache.put(userName, result);
-        }
         return result;
     }
 
     public User save(User user) {
-        User result = this.userRepository.save(user);
-        this.userCache.put(user.getUserName(), result);
-        return result;
+        this.userCache.put(user.getUserName(), user);
+        return user;
     }
 }

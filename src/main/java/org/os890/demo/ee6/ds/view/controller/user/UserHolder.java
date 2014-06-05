@@ -36,6 +36,6 @@ public class UserHolder implements Serializable {
     }
 
     public boolean isLoggedIn() {
-        return user != null && user.getId() != null;
+        return user != null;
     }
 }
