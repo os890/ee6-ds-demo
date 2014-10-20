@@ -32,7 +32,7 @@
     <version>1.0.0</version>
 
     <properties>
-        <ds.version>1.0.1</ds.version>
+        <ds.version>1.0.3</ds.version>
     </properties>
 
     <repositories>
@@ -140,15 +140,15 @@
         <dependency>
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-api</artifactId>
-            <version>2.2.3</version>
+            <version>2.2.5</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-impl</artifactId>
-            <version>2.2.3</version>
-            <scope>test</scope>
+            <version>2.2.5</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -209,13 +209,13 @@
             <plugin>
                 <groupId>org.apache.openejb.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>1.7.0</version>
                 <configuration>
                     <context>ROOT</context>
                     <libs>
                         <lib>remove:myfaces-</lib>
-                        <lib>org.apache.myfaces.core:myfaces-api:2.2.3</lib>
-                        <lib>org.apache.myfaces.core:myfaces-impl:2.2.3</lib>
+                        <lib>org.apache.myfaces.core:myfaces-api:2.2.5</lib>
+                        <lib>org.apache.myfaces.core:myfaces-impl:2.2.5</lib>
                     </libs>
                 </configuration>
             </plugin>
