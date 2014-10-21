@@ -16,16 +16,21 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.os890.demo.ee6.ds.backend.user;
+package org.os890.demo.ee6.spring.backend;
 
+import org.apache.deltaspike.core.api.exclude.Exclude;
 import org.os890.demo.ee6.ds.domain.user.User;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-@ApplicationScoped
+@Exclude //or in an own jar without beans.xml
+
+@Lazy //only needed if a cdi-bean should be injected in a spring-singleton-bean
+@Component
 public class UserRepository {
     @Inject
     private EntityManager entityManager;

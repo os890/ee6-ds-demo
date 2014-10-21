@@ -33,6 +33,8 @@
 
     <properties>
         <ds.version>1.0.3</ds.version>
+        <spring.version>3.2.11.RELEASE</spring.version>
+        <slf4j.version>1.6.6</slf4j.version>
     </properties>
 
     <repositories>
@@ -82,6 +84,41 @@
             <artifactId>deltaspike-security-module-impl</artifactId>
             <version>${ds.version}</version>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- spring-bridge -->
+        <dependency>
+            <groupId>org.os890.ds.addon</groupId>
+            <artifactId>ds-spring-addon</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <!-- optional - used to integrate twitter bootstrap -->

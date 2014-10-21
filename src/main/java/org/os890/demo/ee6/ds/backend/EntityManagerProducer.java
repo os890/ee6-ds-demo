@@ -18,11 +18,12 @@
  */
 package org.os890.demo.ee6.ds.backend;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-//optional: @ApplicationScoped
+@ApplicationScoped
 public class EntityManagerProducer {
 
     @PersistenceContext(unitName = "demoApplicationPU")

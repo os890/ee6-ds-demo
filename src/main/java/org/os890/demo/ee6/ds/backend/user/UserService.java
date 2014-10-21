@@ -19,6 +19,7 @@
 package org.os890.demo.ee6.ds.backend.user;
 
 import org.os890.demo.ee6.ds.domain.user.User;
+import org.os890.demo.ee6.spring.backend.UserRepository;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
