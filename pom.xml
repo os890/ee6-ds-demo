@@ -32,7 +32,7 @@
     <version>1.0.0</version>
 
     <properties>
-        <ds.version>1.1.0</ds.version>
+        <ds.version>1.2.1</ds.version>
     </properties>
 
     <repositories>
